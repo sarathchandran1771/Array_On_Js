@@ -1,27 +1,23 @@
-//Write a function to find the maximum number in an array.
+const bodyParser = require('body-parser')
+const express = require('express')
+const jwt = require('jsonwebtoken') 
+const app = express()
+const PORT = 3005
 
-const numbers = [3, 7, 2, 8, 5, 9, 4, 1, 6, 2];
+app.use(bodyParser.json())
 
-//using method
-function findMax(numbers){
-   let maxValue = Math.max(...numbers)
-   return maxValue
-};
+const payLoad = {
+    userId:'123456'
+}
 
-const largeNumValue = findMax(numbers);
-console.log(largeNumValue);
+const secretKey  = 'aaaaaaaa'
 
-//using Loop
-function findLarge(arr){
-    let maxValue = 0;
-    for(let i = 0; i<arr.length-1; i++){
-        if(arr[i] > maxValue){
-            maxValue = arr[i]
-        }
-    }
-    return maxValue
- };
- 
-const largeValue = findLarge(numbers);
-console.log(largeValue);
+app.post('/generateToken',(req,res)=>{
+    const token = jwt.sign(payLoad,secretKey)
+    console.log(token)
+    res.json({token})
+})
 
+app.listen(PORT,()=>{
+    console.log(`server runnging http://localhost:${PORT}`)
+})

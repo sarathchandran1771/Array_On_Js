@@ -7,7 +7,6 @@ const port = 3000
 const app = express()
 app.use(bodyparser.json())
 
-
 const urlMiddileware = (req,res,next)=>{
 
     console.log(req.url)
@@ -54,7 +53,8 @@ const fs = require('fs');
 const filePath = './helo.txt';
 
 let contentToAdd = 'heloo world'
-// // Write to a file
+
+// Write to a file
 fs.writeFile(filePath, 'Hello, this is some content!', (err) => {
   if (err) {
     console.error('Error writing to file:', err);
